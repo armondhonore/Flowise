@@ -1,0 +1,12 @@
+application:
+  name: flowise
+  pods:
+    - name: app
+      image: flowiseai/flowise:latest
+      path: /
+      servicePorts:
+        - 3000
+      volumes:
+        - name: data
+          mountPath: /root/.flowise
+          size: 5Gi
