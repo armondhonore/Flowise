@@ -15,7 +15,7 @@
 
 ## Project Summary
 <!-- nexlayer:section agent-managed=project_summary -->
-Flowise is a low-code visual tool for building customized LLM orchestration flows and AI agents, allowing users to drag-and-drop components to create complex AI workflows.
+Flowise is a low-code visual tool for building customized LLM orchestration flows and AI agents, providing a drag-and-drop interface to connect various AI components.
 <!-- nexlayer:end -->
 
 ## Technology Stack
@@ -23,17 +23,20 @@ Flowise is a low-code visual tool for building customized LLM orchestration flow
 | Name | Kind | Version | Detected From |
 |------|------|---------|---------------|
 | Node.js | language | 24.15.0 | .nvmrc |
+| TypeScript | language | latest | packages/server/package.json |
+| React | framework | latest | packages/agentflow/package.json |
 | pnpm | tool | 10.26.0 | Dockerfile |
-| TurboRepo | build | latest | turbo.json |
-| Chromium | infra | latest | Dockerfile |
+| Turbo | build | latest | turbo.json |
 <!-- nexlayer:end -->
 
 ## Repository Structure
 <!-- nexlayer:section agent-managed=structure_map -->
-- packages/ — Monorepo packages containing the core logic, server, and UI
-- docker/ — Docker configuration files for deployment
-- i18n/ — Internationalization files
-- assets/ — Static assets for the application
+- packages/server — Backend API and core logic
+- packages/ui — Frontend user interface
+- packages/components — AI node definitions and integrations
+- packages/agentflow — Embeddable React component for workflow visualization
+- packages/observe — Observability components for AI executions
+- packages/api-documentation — Swagger/OpenAPI documentation server
 <!-- nexlayer:end -->
 
 ## External Services Required
@@ -42,6 +45,7 @@ Services that must be configured separately (not deployed by Nexlayer):
 
 - LLM Providers (OpenAI, Anthropic, etc.)
 - Vector Databases (Pinecone, Milvus, etc.)
+- AWS Services (S3, Bedrock, DynamoDB)
 <!-- nexlayer:end -->
 
 ## Local Development Setup
@@ -94,7 +98,6 @@ application:
         PORT: "3000"
         HOSTNAME: "0.0.0.0"
 ```
-
 <!-- nexlayer:end -->
 
 ## Nexlayer Deployment Plan
@@ -121,7 +124,7 @@ application:
 
 ## Nexlayer Configuration
 <!-- nexlayer:section agent-managed=nexlayer_config -->
-**Last deployed:** 2026-06-21T00:56:08Z  
+**Last deployed:** 2026-06-21T01:11:33Z  
 **Live URL:** https://relaxed-weasel-flowise.cloud.nexlayer.ai  
 **Runtime:**  · **Port:** auto-detected  
 **Deploy branch:** nexlayer  
@@ -146,6 +149,7 @@ application:
 <!-- nexlayer:section agent-managed=build_history -->
 | Date | Status | Notes |
 |------|--------|-------|
-| 2026-06-21T00:40:26Z | analyzed | initial repo analysis |
-| 2026-06-21T00:56:08Z | success | deployed https://relaxed-weasel-flowise.cloud.nexlayer.ai |
+| 2026-06-21T01:03:29Z | analyzed | initial repo analysis |
+| 2026-06-21T01:11:33Z | success | deployed https://relaxed-weasel-flowise.cloud.nexlayer.ai |
 <!-- nexlayer:end -->
+
