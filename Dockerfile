@@ -1,10 +1,4 @@
-# Build local monorepo image
-# docker build --no-cache -t  flowise .
-
-# Run image
-# docker run -d -p 3000:3000 flowise
-
-FROM node:24-alpine
+FROM mirror.gcr.io/library/node:24-alpine
 
 # Install system dependencies and build tools
 RUN apk update && \
@@ -22,7 +16,6 @@ RUN apk update && \
 
 ENV PUPPETEER_SKIP_DOWNLOAD=true
 ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser
-
 ENV NODE_OPTIONS=--max-old-space-size=8192
 
 WORKDIR /usr/src/flowise
@@ -30,16 +23,18 @@ WORKDIR /usr/src/flowise
 # Copy app source
 COPY . .
 
-# Install dependencies and build (excluding sdk packages not needed for Docker)
-RUN pnpm install && \
+# Install dependencies and build
+RUN pnpm install --no-frozen-lockfile && \
     pnpm build:docker
 
 # Give the node user ownership of the application files
 RUN chown -R node:node .
 
-# Switch to non-root user (node user already exists in node:20-alpine)
+# Switch to non-root user
 USER node
 
 EXPOSE 3000
+ENV PORT=3000
+ENV HOSTNAME=0.0.0.0
 
 CMD [ "pnpm", "start" ]

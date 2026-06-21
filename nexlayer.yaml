@@ -2,11 +2,11 @@ application:
   name: flowise
   pods:
     - name: app
-      image: flowiseai/flowise:latest
+      image: "registry.nexlayer.io/user_01kece1xyh817dwff7wnarhkxd/flowise:19ee79eb5ac"
       path: /
       servicePorts:
         - 3000
-      volumes:
-        - name: data
-          mountPath: /root/.flowise
-          size: 5Gi
+      vars:
+        NODE_ENV: production
+        PORT: "3000"
+        HOSTNAME: "0.0.0.0"
